@@ -1,0 +1,30 @@
+{
+  "name": "@hmc/security",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "echo 'No tests yet'"
+  },
+  "dependencies": {
+    "@hmc/logger": "*",
+    "express-rate-limit": "^7.5.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
+  },
+  "peerDependencies": {
+    "express": "^4.21.0"
+  }
+}

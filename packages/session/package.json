@@ -1,0 +1,28 @@
+{
+  "name": "@hmc/session",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "echo 'No tests yet'"
+  },
+  "dependencies": {
+    "connect-pg-simple": "^10.0.0",
+    "express-session": "^1.18.0"
+  },
+  "peerDependencies": {
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  }
+}
