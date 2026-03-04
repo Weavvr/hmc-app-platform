@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HMC App Platform Feature Catalog",
+  "description": "Schema for validating the HMC App Platform feature catalog array.",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Feature"
+  },
+  "definitions": {
+    "Feature": {
+      "type": "object",
+      "description": "A single feature in the HMC App Platform catalog.",
+      "required": [
+        "id",
+        "name",
+        "displayName",
+        "description",
+        "tier",
+        "complexity",
+        "package",
+        "status",
+        "bestSource",
+        "alsoIn",
+        "dependencies",
+        "configRequired",
+        "tags",
+        "category"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique feature identifier in the format F-NNN.",
+          "pattern": "^F-\\d{3}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Machine-friendly feature name (kebab-case).",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable feature name.",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the feature's capabilities.",
+          "minLength": 1
+        },
+        "tier": {
+          "type": "integer",
+          "description": "Feature tier: 1 (Foundation), 2 (High-Value), 3 (Domain-Specific), 4 (Enterprise).",
+          "enum": [1, 2, 3, 4]
+        },
+        "complexity": {
+          "type": "string",
+          "description": "Estimated implementation complexity: S (Small), M (Medium), L (Large), XL (Extra Large).",
+          "enum": ["S", "M", "L", "XL"]
+        },
+        "package": {
+          "type": ["string", "null"],
+          "description": "NPM package name if extracted (e.g., @hmc/auth), or null if not yet extracted.",
+          "pattern": "^@hmc/[a-z][a-z0-9-]*$"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status: extracted (code exists as a package), planned (designed but not extracted), domain (domain-specific, stays in source repo).",
+          "enum": ["extracted", "planned", "domain"]
+        },
+        "bestSource": {
+          "type": "string",
+          "description": "The repository with the best/most complete implementation of this feature.",
+          "minLength": 1
+        },
+        "alsoIn": {
+          "type": "array",
+          "description": "Other repositories that also contain an implementation of this feature.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "Feature IDs that this feature depends on.",
+          "items": {
+            "type": "string",
+            "pattern": "^F-\\d{3}$"
+          }
+        },
+        "configRequired": {
+          "type": "array",
+          "description": "Configuration values or secrets required to use this feature.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags for discovery and categorization.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "category": {
+          "type": "string",
+          "description": "Display category grouping.",
+          "enum": ["Foundation", "Shared Features", "Domain Features", "Enterprise & Compliance"]
+        }
+      }
+    }
+  }
+}
