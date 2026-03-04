@@ -1,0 +1,84 @@
+# {{appName}}
+
+{{description}}
+
+---
+
+## Tech Stack
+
+- **Server:** Express.js (TypeScript)
+- **Database:** PostgreSQL + Drizzle ORM
+- **Runtime:** Node.js with tsx for development
+
+---
+
+## HMC Packages Used
+
+{{packages}}
+
+---
+
+## Build & Test Commands
+
+```bash
+# Development
+npm run dev           # Start server with hot reload (tsx watch)
+
+# Build
+npm run build         # Compile TypeScript
+
+# Database
+npm run db:generate   # Generate Drizzle migrations
+npm run db:migrate    # Run pending migrations
+
+# Testing
+npm test              # Run test suite
+
+# Full check (run before pushing)
+npm run build && npx tsc --noEmit && npm test
+```
+
+---
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```bash
+cp .env.example .env
+```
+
+**Required:**
+- `DATABASE_URL` - PostgreSQL connection string
+- `SESSION_SECRET` - Random secret for session encryption
+- `PORT` - Server port (default: 3000)
+
+{{envVars}}
+
+---
+
+## Selected Features
+
+{{features}}
+
+---
+
+## Project Structure
+
+```
+{{appName}}/
+  server/           # Express API server
+    index.ts         # Server entry point
+  drizzle/          # Database migrations
+  .env.example      # Environment variable template
+  package.json
+  tsconfig.json     # TypeScript config
+```
+
+---
+
+## Rules
+
+1. Run `npm run build && npx tsc --noEmit && npm test` before every push
+2. Check generated SQL before running migrations - no DROP TABLE/COLUMN
+3. Server must listen on `0.0.0.0` for deployment compatibility

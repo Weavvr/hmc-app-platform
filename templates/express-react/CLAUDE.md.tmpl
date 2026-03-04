@@ -1,0 +1,93 @@
+# {{appName}}
+
+{{description}}
+
+---
+
+## Tech Stack
+
+- **Server:** Express.js (TypeScript)
+- **Client:** React 18 + Vite
+- **Styling:** TailwindCSS + shadcn/ui
+- **Database:** PostgreSQL + Drizzle ORM
+- **API Layer:** React Query + centralized fetch client
+
+---
+
+## HMC Packages Used
+
+{{packages}}
+
+---
+
+## Build & Test Commands
+
+```bash
+# Development
+npm run dev           # Start server with hot reload (tsx watch)
+npm run dev:client    # Start Vite dev server only
+
+# Build
+npm run build         # Build client (Vite) and server (tsc)
+
+# Database
+npm run db:generate   # Generate Drizzle migrations
+npm run db:migrate    # Run pending migrations
+
+# Testing
+npm test              # Run test suite
+
+# Full check (run before pushing)
+npm run build && npx tsc --noEmit && npm test
+```
+
+---
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```bash
+cp .env.example .env
+```
+
+**Required:**
+- `DATABASE_URL` - PostgreSQL connection string
+- `SESSION_SECRET` - Random secret for session encryption
+- `PORT` - Server port (default: 3000)
+
+{{envVars}}
+
+---
+
+## Selected Features
+
+{{features}}
+
+---
+
+## Project Structure
+
+```
+{{appName}}/
+  client/           # React frontend
+    App.tsx          # Root component with routing
+    main.tsx         # Entry point (React Query + Router)
+  server/           # Express backend
+    index.ts         # Server entry point
+  drizzle/          # Database migrations
+  .env.example      # Environment variable template
+  package.json
+  tsconfig.json     # Client TypeScript config
+  tsconfig.server.json  # Server TypeScript config
+  vite.config.ts    # Vite configuration
+```
+
+---
+
+## Rules
+
+1. Run `npm run build && npx tsc --noEmit && npm test` before every push
+2. Check generated SQL before running migrations - no DROP TABLE/COLUMN
+3. Keep primary UI above the fold
+4. Server must listen on `0.0.0.0` for deployment compatibility
