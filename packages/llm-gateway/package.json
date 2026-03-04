@@ -1,0 +1,26 @@
+{
+  "name": "@hmc/llm-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "echo 'No tests yet'"
+  },
+  "dependencies": {
+    "@hmc/logger": "*",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "openai": "^4.77.0",
+    "@google/generative-ai": "^0.21.0"
+  }
+}
